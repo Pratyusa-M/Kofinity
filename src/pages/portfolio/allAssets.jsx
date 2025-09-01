@@ -1,9 +1,7 @@
-/* eslint-disable no-unused-vars */
 import Header from "../../components/common/Header";
 import Sidebar from "../../components/layout/Sidebar";
 import GrossAssetValueChart from "../../components/portfolio/grossAssetValueChart";
 import GrossAssetMoversChart from "../../components/portfolio/grossAssetMoversChart";
-// import Stockpricegraph from "./stockpricegraph";
 import StockPriceChart1 from "../../components/portfolio/stockPriceChart1";
 import StockPriceChart2 from "../../components/portfolio/stockPriceChart2";
 import Table from "../../components/common/Table";
@@ -26,154 +24,6 @@ import {
   SelectedCurrencySymbol,
 } from "../../redux/store/slice/currencySlice";
 
-const data = [
-  {
-    name: "01/08/2016",
-    uv: 0,
-    pv: 24,
-    amt: 24,
-  },
-  {
-    name: "02/08/2016",
-    uv: 0,
-    pv: 13,
-    amt: 22,
-  },
-  {
-    name: "03/08/2016",
-    uv: 0,
-    pv: 98,
-    amt: 22,
-  },
-  {
-    name: "04/08/2016",
-    uv: 0,
-    pv: 39,
-    amt: 20,
-  },
-  { name: "05/08/2016", uv: 0, pv: 48, amt: 21 },
-  {
-    name: "06/08/2016",
-    uv: 10,
-    pv: 38,
-    amt: 25,
-  },
-  {
-    name: "07/08/2016",
-    uv: 10,
-    pv: 43,
-    amt: 21,
-  },
-  {
-    name: "08/08/2016",
-    uv: 10,
-    pv: 43,
-    amt: 21,
-  },
-];
-
-const data2 = [
-  {
-    name: "01/08/2016",
-    uv: 0,
-    pv: 24,
-    amt: 24,
-  },
-  {
-    name: "02/08/2016",
-    uv: 2,
-    pv: 13,
-    amt: 22,
-  },
-  {
-    name: "03/08/2016",
-    uv: 4,
-    pv: 98,
-    amt: 22,
-  },
-  {
-    name: "04/08/2016",
-    uv: 1,
-    pv: 39,
-    amt: 20,
-  },
-  { name: "05/08/2016", uv: 8, pv: 48, amt: 21 },
-  {
-    name: "06/08/2016",
-    uv: 3,
-    pv: 38,
-    amt: 25,
-  },
-  {
-    name: "07/08/2016",
-    uv: 5,
-    pv: 43,
-    amt: 21,
-  },
-  {
-    name: "08/08/2016",
-    uv: 1,
-    pv: 43,
-    amt: 21,
-  },
-];
-
-const items = [{ label: "Portfolio > All Assets", link: "./" }];
-const tableProps = {
-  title: "All Assets",
-  totalValue: "$96000",
-  valueChange: "+$6000",
-  percentageChange: "+40%",
-};
-
-const tableHeadings = ["Assets", "Book value", "Market value", "Gain & Loss",];
-
-const tableData = [
-  ["Stocks", "$5000", "$4500"],
-  ["Real Estate", "$5000", "$4500"],
-  ["Crypto", "$5000", "$4500"],
-  ["Banks", "$5000", "$4500"],
-  ["Other Assets", "$5000", "$4500"],
-];
-
-const stockPriceData = [
-  {
-    id: 0,
-    stockName: "Stocks",
-    stockPrice: "$200k",
-    stockShare: "40%",
-    backgroundcolor: "#D6475D",
-  },
-  {
-    id: 1,
-    stockName: "Real Estate",
-    stockPrice: "$100k",
-    stockShare: "15%",
-    backgroundcolor: "#6F50E5",
-  },
-  {
-    id: 2,
-    stockName: "Crypto",
-    stockPrice: "$100k",
-    stockShare: "15%",
-    backgroundcolor: "#486DF0",
-  },
-  {
-    id: 3,
-    stockName: "Bank Account",
-    stockPrice: "$100k",
-    stockShare: "15%",
-    backgroundcolor: "#85357D",
-  },
-  {
-    id: 4,
-    stockName: "Other Assets",
-    stockPrice: "$100k",
-    stockShare: "15%",
-    backgroundcolor: "#9B51E0",
-  },
-];
-
 const AllAssetsPage = () => {
   const [isDropdownOpen, setDropdownOpen] = useState(false);
   const [isChartLoading, setChartLoading] = useState(false);
@@ -182,18 +32,16 @@ const AllAssetsPage = () => {
   const [tpId, setTpId] = useState(4);
   const [selectedOption, setSelectedOption] = useState(1);
   const [allAssetsData, setAllAssetsData] = useState([]);
-  console.log("allassetsdata", allAssetsData);
   const [allAssetsChartDataGAV, setAllAssetsChartDataGAV] = useState([]);
   const [allAssetsChartDataNAV, setAllAssetsChartDataNAV] = useState([]);
-  const [grossAssetProfit, setGrossAssetProfit] = useState();
-  const [grossAssetProfitPercent, setGrossAssetProfitPercent] = useState();
-  const [netAssetProfit, setNetAssetProfit] = useState();
-  const [netAssetProfitPercent, setNetAssetProfitPercent] = useState();
-
+  const [grossAssetProfit, setGrossAssetProfit] = useState(0);
+  const [grossAssetProfitPercent, setGrossAssetProfitPercent] = useState(0);
+  const [netAssetProfit, setNetAssetProfit] = useState(0);
+  const [netAssetProfitPercent, setNetAssetProfitPercent] = useState(0);
   const [allAssetPriceDataGav, setAllAssetPriceDataGav] = useState([]);
   const [allAssetPriceDataNav, setAllAssetPriceDataNav] = useState([]);
-  const [assetValue, setAssetValue] = useState();
-  const [navAssetValue, setNavAssetValue] = useState();
+  const [assetValue, setAssetValue] = useState(0);
+  const [navAssetValue, setNavAssetValue] = useState(0);
   const [intervalText, setIntervalText] = useState("year");
 
   const dropdownRef = useRef(null);
@@ -202,10 +50,8 @@ const AllAssetsPage = () => {
   const selectedCurrencyId = useSelector(selectedMainCurrencyId);
 
   useEffect(() => {
-    // getAllAssetsData();
     getAllAssetsChartDataGAV();
     getAllAssetsChartDataNAV();
-    // getpriceData();
   }, [selectedCurrencyId, intervalText]);
 
   useEffect(() => {
@@ -214,7 +60,6 @@ const AllAssetsPage = () => {
   }, [selectedCurrencyId]);
 
   const convertAllAssetsData = (data) => {
-    console.log(data, "all assets data");
     const tableDataAllStocks = [
       `Stocks`,
       `${selectedCurencySymbol}${FormatNumberWithCommas(
@@ -234,8 +79,7 @@ const AllAssetsPage = () => {
       `${FormatNumberWithCommas(data?.totalGainOrLossCrypto || 0)}`,
       `${(data?.totalGainOrLossCryptoPercent ?? 0).toFixed(2) || 0}%`,
     ];
-    console.log(data?.totalGainOrLossCryptoPercent, "crypto percent", FormatNumberWithCommas(data?.totalGainOrLossCryptoPercent));
-    console.log(data?.totalGainOrLossCrypto, "crypto gain or loss");
+
     const tableDataAllrealEstate = [
       `Real Estate`,
       `${selectedCurencySymbol}${FormatNumberWithCommas(
@@ -270,16 +114,7 @@ const AllAssetsPage = () => {
       )}`,
       `${FormatNumberWithCommas(0)}`,
       `${0}%`,
-      // `${FormatNumberWithCommas(data?.totalGainOrLossBalance || 0)}`,
-      // `${data?.totalGainOrLossBalancePercent?.toFixed(2) || 0}%`,
     ];
-    console.log([
-      tableDataAllStocks,
-      tableDataAllCrypto,
-      tableDataAllrealEstate,
-      tableDataAllOtherAssets,
-      tableDataAllBankAccount,
-    ], "all assets table data");
 
     setAllAssetsData([
       tableDataAllStocks,
@@ -327,22 +162,23 @@ const AllAssetsPage = () => {
       );
 
       convertAllAssetsData(response?.data?.data);
-      setAssetValue(response?.data?.data?.totalCurrentValue);
-      setNavAssetValue(response?.data?.data?.total_net_value);
-      setGrossAssetProfit(response?.data?.data?.totalAssetGainOrLoss);
-      setGrossAssetProfitPercent(response?.data?.data?.totalAssetGainOrLossPercent);
-      setNetAssetProfit(response?.data?.data?.totalNetGainOrLoss)
-      setNetAssetProfitPercent(response?.data?.data?.totalNetGainOrLossPercent)
+      setAssetValue(response?.data?.data?.totalCurrentValue || 0);
+      setNavAssetValue(response?.data?.data?.total_net_value || 0);
+      setGrossAssetProfit(response?.data?.data?.totalAssetGainOrLoss || 0);
+      setGrossAssetProfitPercent(
+        response?.data?.data?.totalAssetGainOrLossPercent || 0
+      );
+      setNetAssetProfit(response?.data?.data?.totalNetGainOrLoss || 0);
+      setNetAssetProfitPercent(response?.data?.data?.totalNetGainOrLossPercent || 0);
       setTableLoading(false);
     } catch (error) {
       setAllAssetsData([]);
       setAssetValue(0);
       setNavAssetValue(0);
-
       setGrossAssetProfit(0);
       setGrossAssetProfitPercent(0);
-      setNetAssetProfit(0)
-      setNetAssetProfitPercent(0)
+      setNetAssetProfit(0);
+      setNetAssetProfitPercent(0);
       console.log(error.message);
       setTableLoading(false);
     }
@@ -381,10 +217,9 @@ const AllAssetsPage = () => {
       setAllAssetsChartDataGAV(modifiedData);
     } else {
       const modifiedData = data?.map((item) => ({
-        year: item?.year || item?.start_date || item?.quarter,
+        year: item?.year,
         current_totalAsset_value: item?.cumulativeValue || 0,
       }));
-
       setAllAssetsChartDataGAV(modifiedData);
     }
     setChartLoading(false);
@@ -394,29 +229,29 @@ const AllAssetsPage = () => {
     if (interval === "month") {
       const modifiedData = data?.map((item) => ({
         year: item?.year + " " + item?.monthName?.slice(0, 3),
-        total_net_value: item?.cumulativeValue || 0,
+        current_totalAsset_value: item?.cumulativeValue || 0, // Match GAV chart key
       }));
       setAllAssetsChartDataNAV(modifiedData);
     } else if (interval === "quarter") {
       const modifiedData = data?.map((item) => ({
         year: item?.year + " Q" + item?.quarter,
-        total_net_value: item?.cumulativeValue || 0,
+        current_totalAsset_value: item?.cumulativeValue || 0,
       }));
       setAllAssetsChartDataNAV(modifiedData);
     } else if (interval === "week") {
       const modifiedData = data?.map((item) => ({
         year: moment(item?.start_date).format("DD/MM/YYYY"),
-        total_net_value: item?.cumulativeValue || 0,
+        current_totalAsset_value: item?.cumulativeValue || 0,
       }));
       setAllAssetsChartDataNAV(modifiedData);
     } else {
       const modifiedData = data?.map((item) => ({
-        year: item?.year || item?.start_date || item?.quarter,
-        total_net_value: item?.cumulativeValue || 0,
+        year: item?.year,
+        current_totalAsset_value: item?.cumulativeValue || 0,
       }));
-
       setAllAssetsChartDataNAV(modifiedData);
     }
+    setChartLoading(false);
   };
 
   const getAllAssetsChartDataGAV = async () => {
@@ -431,17 +266,10 @@ const AllAssetsPage = () => {
           },
         }
       );
-
+      console.log(response, "gav chart");
       convertAllAssetsChartDataGAV(response?.data?.data?.data, intervalText);
-      // setGrossAssetProfit(response?.data?.data?.profitLoss?.profitLossValue);
-      // setGrossAssetProfitPercent(
-      //   response?.data?.data?.profitLoss?.profitLossPercentage
-      // );
-      setChartLoading(false);
     } catch (error) {
       setAllAssetsChartDataGAV([]);
-      // setGrossAssetProfit(0);
-      // setGrossAssetProfitPercent(0);
       setChartLoading(false);
       console.log(error.message);
     }
@@ -459,17 +287,10 @@ const AllAssetsPage = () => {
           },
         }
       );
-
+      console.log(response, "nav chart");
       convertAllAssetsChartDataNAV(response?.data?.data?.data, intervalText);
-      // setNetAssetProfit(response?.data?.data?.profitLoss?.profitLossValue);
-      // setNetAssetProfitPercent(
-      //   response?.data?.data?.profitLoss?.profitLossPercentage
-      // );
-      setChartLoading(false);
     } catch (error) {
       setAllAssetsChartDataNAV([]);
-      // setNetAssetProfit(0);
-      // setNetAssetProfitPercent(0);
       setChartLoading(false);
       console.log(error.message);
     }
@@ -522,36 +343,36 @@ const AllAssetsPage = () => {
       {
         id: 0,
         stockName: "Stocks",
-        stockPrice: data?.total_stock_net_value,
-        stockShare: data?.NAVStockPercent,
+        stockPrice: data?.total_stock_net_value || 0,
+        stockShare: data?.NAVStockPercent || 0,
         backgroundcolor: "#D6475D",
       },
       {
         id: 1,
         stockName: "Real Estate",
-        stockPrice: data?.total_realEstate_net_value,
-        stockShare: data?.NAVRealEstatePercent,
+        stockPrice: data?.total_realEstate_net_value || 0,
+        stockShare: data?.NAVRealEstatePercent || 0,
         backgroundcolor: "#6F50E5",
       },
       {
         id: 2,
         stockName: "Crypto",
-        stockPrice: data?.total_crypto_net_value,
-        stockShare: data?.NetCryptoPercent,
+        stockPrice: data?.total_crypto_net_value || 0,
+        stockShare: data?.NetCryptoPercent || 0,
         backgroundcolor: "#486DF0",
       },
       {
         id: 3,
         stockName: "Bank Account",
-        stockPrice: data?.total_bankAccount_net_value,
-        stockShare: data?.NAVBankAccountPercent,
+        stockPrice: data?.total_bankAccount_net_value || 0,
+        stockShare: data?.NAVBankAccountPercent || 0,
         backgroundcolor: "#85357D",
       },
       {
         id: 4,
         stockName: "Other Assets",
-        stockPrice: data?.total_otherAsset_net_value,
-        stockShare: data?.NAVOtherAssetPercent,
+        stockPrice: data?.total_otherAsset_net_value || 0,
+        stockShare: data?.NAVOtherAssetPercent || 0,
         backgroundcolor: "#9B51E0",
       },
     ];
@@ -563,8 +384,6 @@ const AllAssetsPage = () => {
     if (each?.id !== tpId) {
       setTpId(each.id);
       setIntervalText(each.interval);
-      // getAllAssetsChartDataGAV(each.interval);
-      // getAllAssetsChartDataNAV(each.interval);
     }
   };
 
@@ -608,13 +427,13 @@ const AllAssetsPage = () => {
   }, []);
 
   return (
-    <div className="h-full w-full flex flex-col  items-center text-4xl text-roboto font-[600] text-white bg-black">
-      <Header items={items} />
+    <div className="h-full w-full flex flex-col items-center text-4xl text-roboto font-[600] text-white bg-black">
+      <Header items={[{ label: "Portfolio > All Assets", link: "./" }]} />
       <div className="self-start ml-6 -mb-8 md:-mb-5 md:mt-3">
-        <Breadcrumbs items={items} />
+        <Breadcrumbs items={[{ label: "Portfolio > All Assets", link: "./" }]} />
       </div>
-      <div className=" w-full flex flex-col gap-[32px] mt-[32px] px-[5px] md:pl-[24px] md:pr-[28px] pb-[82px]">
-        <div className="flex justify-between w-[100%] flex-wrap gap-8 xl:gap-0 ">
+      <div className="w-full flex flex-col gap-[32px] mt-[32px] px-[5px] md:pl-[24px] md:pr-[28px] pb-[82px]">
+        <div className="flex justify-between w-[100%] flex-wrap gap-8 xl:gap-0">
           <div className="w-[100%] xl:w-[76%] bg-[#191919] rounded pt-0 md:pt-[10px] p-[10px] md:p-[24px] relative">
             <div ref={dropdownRef}>
               <div
@@ -625,24 +444,19 @@ const AllAssetsPage = () => {
                   ? "Gross Asset Value(GAV)"
                   : "Net Asset Value(NAV)"}
                 <img
-                  className={` transform ${!isDropdownOpen ? "rotate-0" : "rotate-180"
-                    }`}
+                  className={`transform ${!isDropdownOpen ? "rotate-0" : "rotate-180"}`}
                   src={caretdown}
                   alt="down"
                 />
               </div>
               {isDropdownOpen && (
-                <div
-                  // ref={dropdownRef}
-                  className="w-[220px] absolute top-[60px] rounded pt-0 bg-[#2E2E2E] sm:w-[297px] h-auto  flex flex-col z-10 overflow-y-auto"
-                >
+                <div className="w-[220px] absolute top-[60px] rounded pt-0 bg-[#2E2E2E] sm:w-[297px] h-auto flex flex-col z-10 overflow-y-auto">
                   {assetsData?.map((each, idx) => (
                     <p
                       key={idx}
                       onClick={() => onClickvalue(each.id, each.opt)}
-                      className={`text-[#F6F8FB] text-[16px] font-[400] text-roboto my-1 pl-2  hover:bg-[#3E3E3E] cursor-pointer ${selectedOption === each.id && "bg-[#3E3E3E]"
-                        }
-                 `}
+                      className={`text-[#F6F8FB] text-[16px] font-[400] text-roboto my-1 pl-2 hover:bg-[#3E3E3E] cursor-pointer ${selectedOption === each.id && "bg-[#3E3E3E]"
+                        }`}
                     >
                       {each.opt}
                     </p>
@@ -663,43 +477,39 @@ const AllAssetsPage = () => {
                 chartLoading()
               )
             ) : !isChartLoading ? (
-              // Use GrossAssetValueChart for NAV as well to match the gradual style, adjusting props for NAV data
               <GrossAssetValueChart
                 assetValue={navAssetValue}
                 grossAssetProfit={netAssetProfit}
                 grossAssetProfitPercent={netAssetProfitPercent}
-                data={allAssetsChartDataNAV.map(item => ({ // Remap data to match expected key in GrossAssetValueChart
-                  year: item.year,
-                  current_totalAsset_value: item.total_net_value,
-                }))}
+                data={allAssetsChartDataNAV}
                 dateKey={"year"}
               />
             ) : (
               chartLoading()
             )}
             <div className="flex items-center gap-[10px] xl:gap-[32px] ml-[55px] xl:ml-[55px] mt-[8px] flex-wrap">
-              {timePeriod.map((each, idx) => {
-                return (
-                  <button
-                    onClick={() => onSelectTp(each)}
-                    key={idx}
-                    className={`w-[55px] h-[27px] text-[#A8A8A8] text-[12px] text-roboto font-[400] flex items-center justify-center hover:bg-[#2E2E2E] hover:bg-opacity-50 hover:rounded-[13.5px] ${tpId === each.id && "bg-[#2E2E2E] rounded-[13.5px]"
-                      }`}
-                  >
-                    {each.tp}
-                  </button>
-                );
-              })}
+              {timePeriod.map((each, idx) => (
+                <button
+                  onClick={() => onSelectTp(each)}
+                  key={idx}
+                  className={`w-[55px] h-[27px] text-[#A8A8A8] text-[12px] text-roboto font-[400] flex items-center justify-center hover:bg-[#2E2E2E] hover:bg-opacity-50 hover:rounded-[13.5px] ${tpId === each.id && "bg-[#2E2E2E] rounded-[13.5px]"
+                    }`}
+                >
+                  {each.tp}
+                </button>
+              ))}
             </div>
           </div>
           <div className="w-full min-w-[265px] md:w-[22%]">
             {selectedOption === 1 ? (
               !isChartLoading2 ? (
+                console.log(allAssetPriceDataGav, "gav price data"),
                 <StockPriceChart1 stockPriceData={allAssetPriceDataGav} />
               ) : (
                 <LoadingStockPriceChart />
               )
             ) : !isChartLoading2 ? (
+              console.log(allAssetPriceDataNav, "nav price data"),
               <StockPriceChart2 stockPriceData={allAssetPriceDataNav} />
             ) : (
               <LoadingStockPriceChart />
@@ -709,8 +519,13 @@ const AllAssetsPage = () => {
         <div>
           {!isTableLoading ? (
             <AllAssetsTable
-              tableProps={tableProps}
-              tableHeadings={tableHeadings}
+              tableProps={{
+                title: "All Assets",
+                totalValue: `${selectedCurencySymbol}${FormatNumberWithCommas(assetValue)}`,
+                valueChange: `${selectedCurencySymbol}${FormatNumberWithCommas(grossAssetProfit)}`,
+                percentageChange: `${grossAssetProfitPercent?.toFixed(2) || 0}%`,
+              }}
+              tableHeadings={["Assets", "Book value", "Market value", "Gain & Loss"]}
               tableData={allAssetsData}
               profit={grossAssetProfit}
               profitPercent={grossAssetProfitPercent}
@@ -721,8 +536,13 @@ const AllAssetsPage = () => {
               profit={grossAssetProfit}
               profitPercent={grossAssetProfitPercent}
               assetValue={assetValue}
-              tableProps={tableProps}
-              tableHeadings={tableHeadings}
+              tableProps={{
+                title: "All Assets",
+                totalValue: `${selectedCurencySymbol}${FormatNumberWithCommas(assetValue)}`,
+                valueChange: `${selectedCurencySymbol}${FormatNumberWithCommas(grossAssetProfit)}`,
+                percentageChange: `${grossAssetProfitPercent?.toFixed(2) || 0}%`,
+              }}
+              tableHeadings={["Assets", "Book value", "Market value", "Gain & Loss"]}
               tableData={allAssetsData}
             />
           )}

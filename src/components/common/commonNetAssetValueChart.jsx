@@ -54,17 +54,15 @@ const CommonNetAssetvalueChart = ({
             </p>
             <div className="flex items-center gap-2">
               <p
-                className={`text-[16px] text-lato font-[400] ${
-                  profitPercent >= 0 ? "text-[#1FB98B]" : "text-[#B91F1F]"
-                }`}
+                className={`text-[16px] text-lato font-[400] ${profitPercent >= 0 ? "text-[#1FB98B]" : "text-[#B91F1F]"
+                  }`}
               >
                 {selectedCurencySymbol}
                 {FormatNumberWithCommas(profit || 0) || 0}
               </p>
               <p
-                className={` h-[18px] text-[12px] text-lato font-[400] bg-[#2E2E2E] flex items-center justify-center rounded-[2px] gap-1 ${
-                  profitPercent >= 0 ? "text-[#1FB98B]" : "text-[#B91F1F]"
-                }`}
+                className={` h-[18px] text-[12px] text-lato font-[400] bg-[#2E2E2E] flex items-center justify-center rounded-[2px] gap-1 ${profitPercent >= 0 ? "text-[#1FB98B]" : "text-[#B91F1F]"
+                  }`}
               >
                 <span>{profitPercent?.toFixed(2) || 0}% </span>
                 {profitPercent >= 0 ? (
@@ -120,8 +118,8 @@ const CommonNetAssetvalueChart = ({
                       dx: 0,
                       className: "custom-axis-label",
                     }}
-                    // padding={{ left: 5 }}
-                    // domain={['dataMin', 'dataMax']}
+                  // padding={{ left: 5 }}
+                  // domain={['dataMin', 'dataMax']}
                   />
                   <YAxis
                     // ticks={[0, 5, 10, 15, 20, 25]}
@@ -165,14 +163,14 @@ const CommonNetAssetvalueChart = ({
                     //   fill="url(#colorGradient)"
                     fill={fillColor ? fillColor : "#241C23"}
                     strokeWidth={2}
-                    // dot={{ stroke: '#00FF00', fill: '#00FF00', r: 15 }}
-                    // activeDot={{ r: 10 }}
+                  // dot={{ stroke: '#00FF00', fill: '#00FF00', r: 15 }}
+                  // activeDot={{ r: 10 }}
                   />
                   <ReferenceLine
-  y={0}
-  stroke="#444"
-  strokeWidth={1}
-/>
+                    y={0}
+                    stroke="#444"
+                    strokeWidth={1}
+                  />
                 </AreaChart>
               </ResponsiveContainer>
             </div>

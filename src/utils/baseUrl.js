@@ -1,2 +1,2 @@
 
-export const baseUrl = "https://kofinity-v2.vercel.app/";
+export const baseUrl = "https://kofinity-latest.vercel.app";
